@@ -147,14 +147,14 @@ cd ../
    
 3. Build Toolchain for Windows(build=x86_64-linux host=i686-w64-mingw32 target=arm-linux-gnueabi)
    
-   add host.conf(workspace/host.conf)
+   add text in host.conf(workspace/host.conf)
 
    ```
    host=i686-w64-mingw32
    target=arm-linux-gnueabi
    ```
 
-   fix mingw32
+   fix mingw32 bug
 
    ```
    '::hypot' has not been declared
@@ -162,7 +162,7 @@ cd ../
    sudo gedit /usr/lib/gcc/i686-w64-mingw32/9.3-win32/include/cmath
    1121: using ::hypot; → using ::_hypot;
    ```
-   build (not configure command)
+   build (No configure)
    ```
    #build（need many time）
    ../abe/abe.sh --manifest gcc-linaro-6.4.1-2017.11-win32-manifest.txt --release 2017.11 --tarball --build all

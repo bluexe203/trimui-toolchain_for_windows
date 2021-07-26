@@ -6,19 +6,19 @@ https://www.msys2.org/
 1. Install msys2 (e.g. C:\msys64)
 
 2. Configure msys2.ini(C:\msys64\msys2.ini)
-
+   
    ```
-HOME=home/trimui
-PATH=$PATH:/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi
+   HOME=home/trimui
+   PATH=$PATH:/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi
    ```
 
 3. Install Package
 
    Run msys2.exe
-
+   
    ```
-pacman -S make
-pacman -S libtool
+   pacman -S make
+   pacman -S libtool
    ```
 
 4. Download Toolchain for Windows
@@ -64,6 +64,8 @@ line:45(if argument is --cflags)
 before      echo -I${prefix}/include/SDL -D_GNU_SOURCE=1      
 after       echo -I${prefix}/include/ -D_GNU_SOURCE=1
 ```
+
+
 
 
 

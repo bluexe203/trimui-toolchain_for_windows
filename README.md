@@ -21,8 +21,7 @@ https://www.msys2.org/
    pacman -S libtool
    ```
 
-4. Download Toolchain for Windows
-[Toolchain for Windows](https://drive.google.com/file/d/1faaciy_PZXPGHM77n0C4jrhVAFW9FZM-/view?usp=sharing)
+4. [Download Toolchain for Windows](https://drive.google.com/file/d/1faaciy_PZXPGHM77n0C4jrhVAFW9FZM-/view?usp=sharing)
 
 5. Extract Toolchain
 

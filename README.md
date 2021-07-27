@@ -116,6 +116,9 @@ git clone https://github.com/bluexe203/trimui-toolchain_for_windows.git
 # Use This Manufest
 # workspace/gcc-linaro-6.4.1-2017.11-linux-manifest.txt
 # workspace/gcc-linaro-6.4.1-2017.11-win32-manifest.txt
+cd trimui-toolchain_for_windows
+cp -r workspace/ ../workspace
+cd ../
 ```
 
 ### Get ABE.sh
@@ -126,6 +129,13 @@ cd abe/
 git checkout 333add3ae07b35815672a8a1d03eb443e5ea87fe
 cd ../
 ```
+
+### Check Directories
+```
+abe/
+workspace/
+```
+
 
 ### Canadian Crossbuild
 

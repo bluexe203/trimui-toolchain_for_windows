@@ -92,7 +92,7 @@ wget -nc http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.12.tar.g
 tar xvf SDL_mixer-1.2.12.tar.gz
 if [ -e ./SDL_mixer-1.2.12 ]; then
 pushd SDL_mixer-1.2.12
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
+LDFLAGS="-L$TRIMUI_PREFIX/lib -lSDL -lm -ldl" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
 make
 make install
 popd

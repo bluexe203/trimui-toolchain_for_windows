@@ -38,33 +38,16 @@ https://www.msys2.org/
    ```
    arm-linux-gnueabi-gcc -v
    ```
-## Install SDL
+## Install Library
 
    On msys2
 
 ```
-cd ~
-wget http://www.libsdl.org/release/SDL-1.2.15.tar.gz
-tar xvf SDL-1.2.15.tar.gz
-
-#configure
-cd SDL-1.2.15
-./configure --disable-pulseaudio --build=arm-linux --host=arm-linux-gnueabi --prefix=/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi --disable-static --enable-video-fbcon=no
-
-#make
-make
-make install
+pacman -S git
+git clone https://github.com/bluexe203/trimui-toolchain_for_windows.git
+cd trimui-toolchain_for_windows
+bash Msys2_LibrarySetup.sh
 ```
-
-fix sdl-config(/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi/bin/sdl-config)
-
-```
-line:45(if argument is --cflags)
-before      echo -I${prefix}/include/SDL -D_GNU_SOURCE=1      
-after       echo -I${prefix}/include/ -D_GNU_SOURCE=1
-```
-
-
 
 
 

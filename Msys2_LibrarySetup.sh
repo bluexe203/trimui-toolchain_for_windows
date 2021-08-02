@@ -54,6 +54,17 @@ make install
 popd
 fi
 
+#alsa-lib-1.1.1
+wget -nc ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.1.1.tar.bz2
+tar xvf alsa-lib-1.1.1.tar.bz2
+if [ -e ./alsa-lib-1.1.1 ]; then
+pushd alsa-lib-1.1.1
+CFLAGS="-I$TRIMUI_PREFIX/include" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-alsa-devdir=/dev/snd --with-pcm-plugins=all --with-ctl-plugins=all --without-versioned --enable-static=no --disable-python --with-softfloat
+make
+make install
+popd
+fi
+
 #sdl-1.2.15
 wget -nc http://www.libsdl.org/release/SDL-1.2.15.tar.gz
 tar xvf SDL-1.2.15.tar.gz

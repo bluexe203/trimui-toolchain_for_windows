@@ -143,3 +143,12 @@ make
 make install
 popd
 fi
+
+#boost1.76.0
+wget -nc https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.bz2
+#tar xvf boost_1_76_0.tar.bz2
+if [ -e ./boost_1_76_0 ]; then
+pushd boost_1_76_0
+cp -f -r ./boost/ $TRIMUI_PREFIX/include/boost/
+popd
+fi

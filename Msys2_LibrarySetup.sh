@@ -4,6 +4,9 @@ export ARCH=arm
 export TRIMUI_PREFIX=/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi
 export TRIMUI_LIB_PREFIX=$TRIMUI_PREFIX/arm-linux-gnueabi/libc/lib
 export CROSS_PREFIX=arm-linux-gnueabi-
+export LDFLAGS="-L$TRIMUI_PREFIX/lib"
+export CPPFLAGS="-I$TRIMUI_PREFIX/include"
+export PKG_CONFIG_PATH=$TRIMUI_PREFIX/lib/pkgconfig
 
 mkdir package
 pushd package
@@ -14,6 +17,7 @@ wget -nc http://downloads.sourceforge.net/project/libpng/zlib/1.2.8/zlib-1.2.8.t
 tar xvf zlib-1.2.8.tar.xz
 if [ -e ./zlib-1.2.8 ]; then
 pushd zlib-1.2.8
+../../tool/ConfigConv configure
 ./configure --shared --prefix=$TRIMUI_PREFIX
 make
 make install
@@ -37,6 +41,7 @@ wget -nc http://www.ijg.org/files/jpegsrc.v9b.tar.gz
 tar xvf jpegsrc.v9b.tar.gz
 if [ -e ./jpeg-9b ]; then
 pushd jpeg-9b
+#../../tool/ConfigConv configure
 ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared
 make
 make install
@@ -48,7 +53,8 @@ wget -nc http://downloads.sourceforge.net/project/libpng/libpng12/older-releases
 tar xvf libpng-1.2.56.tar.xz
 if [ -e ./libpng-1.2.56 ]; then
 pushd libpng-1.2.56
-CPPFLAGS="-I$TRIMUI_PREFIX/include" LDFLAGS="-L$TRIMUI_PREFIX/lib" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-arm-neon=no
+#../../tool/ConfigConv configure
+./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-arm-neon=no
 make
 make install
 popd
@@ -59,7 +65,8 @@ wget -nc ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.1.1.tar.bz2
 tar xvf alsa-lib-1.1.1.tar.bz2
 if [ -e ./alsa-lib-1.1.1 ]; then
 pushd alsa-lib-1.1.1
-CFLAGS="-I$TRIMUI_PREFIX/include" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-alsa-devdir=/dev/snd --with-pcm-plugins=all --with-ctl-plugins=all --without-versioned --enable-static=no --disable-python --with-softfloat
+#../../tool/ConfigConv configure
+./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-alsa-devdir=/dev/snd --with-pcm-plugins=all --with-ctl-plugins=all --without-versioned --enable-static=no --disable-python --with-softfloat
 make
 make install
 popd
@@ -70,6 +77,7 @@ wget -nc http://www.libsdl.org/release/SDL-1.2.15.tar.gz
 tar xvf SDL-1.2.15.tar.gz
 if [ -e ./SDL-1.2.15 ]; then
 pushd SDL-1.2.15
+../../tool/ConfigConv configure
 ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-video-fbcon=no --enable-video-directfb=no --enable-video-qtopia=no --enable-video-x11=no --disable-pth --disable-rpath --enable-pulseaudio=no --disable-arts --disable-esd --disable-nasm --disable-video-ps3
 make
 make install
@@ -81,6 +89,7 @@ wget -nc https://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-2.0.23.tar.gz
 tar xvf SDL_gfx-2.0.23.tar.gz
 if [ -e ./SDL_gfx-2.0.23 ]; then
 pushd SDL_gfx-2.0.23
+../../tool/ConfigConv configure
 ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --enable-static --disable-mmx
 make
 make install
@@ -92,7 +101,8 @@ wget -nc http://www.libsdl.org/projects/SDL_image/release/SDL_image-1.2.12.tar.g
 tar xvf SDL_image-1.2.12.tar.gz
 if [ -e ./SDL_image-1.2.12 ]; then
 pushd SDL_image-1.2.12
-LDFLAGS="-L$TRIMUI_LIB_PREFIX -lm -ldl" ./configure  --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --disable-static --enable-bmp=yes --enable-gif=no --enable-jpg=yes --enable-lbm=no --enable-pcx=no --enable-png=yes --enable-pnm=no --enable-tga=no --enable-tif=no --enable-webp=no --enable-xcf=no --enable-xpm=no --enable-xv=no
+../../tool/ConfigConv configure
+./configure  --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --disable-static --enable-bmp=yes --enable-gif=no --enable-jpg=yes --enable-lbm=no --enable-pcx=no --enable-png=yes --enable-pnm=no --enable-tga=no --enable-tif=no --enable-webp=no --enable-xcf=no --enable-xpm=no --enable-xv=no
 make
 make install
 popd
@@ -103,7 +113,8 @@ wget -nc http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.12.tar.g
 tar xvf SDL_mixer-1.2.12.tar.gz
 if [ -e ./SDL_mixer-1.2.12 ]; then
 pushd SDL_mixer-1.2.12
-LDFLAGS="-L$TRIMUI_PREFIX/lib -lSDL -lm -ldl" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
+../../tool/ConfigConv configure
+./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
 make
 make install
 popd
@@ -114,7 +125,8 @@ wget -nc http://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8.tar.gz
 tar xvf SDL_net-1.2.8.tar.gz
 if [ -e ./SDL_net-1.2.8 ]; then
 pushd SDL_net-1.2.8
-LDFLAGS="-L$TRIMUI_PREFIX/lib -lSDL -lm -ldl" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --with-sdl-exec-prefix=/var/lib/trimui-toolchain//usr/arm-linux-gnueabi/sysroot/usr
+../../tool/ConfigConv configure
+./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --with-sdl-exec-prefix=/var/lib/trimui-toolchain//usr/arm-linux-gnueabi/sysroot/usr
 make
 make install
 popd
@@ -125,6 +137,7 @@ wget -nc http://icculus.org/SDL_sound/downloads/SDL_sound-1.0.3.tar.gz
 tar xvf SDL_sound-1.0.3.tar.gz
 if [ -e ./SDL_sound-1.0.3 ]; then
 pushd SDL_sound-1.0.3
+../../tool/ConfigConv configure
 ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --enable-static --disable-mmx
 make
 make install
@@ -136,7 +149,8 @@ wget -nc http://downloads.sourceforge.net/project/freetype/freetype2/2.6.3/freet
 tar xvf freetype-2.6.3.tar.bz2
 if [ -e ./freetype-2.6.3 ]; then
 pushd freetype-2.6.3
-CC=arm-linux-gnueabi-gcc CC_BUILD=arm-linux-gnueabi-gcc CFLAGS="-I$TRIMUI_PREFIX/include" LDFLAGS="-L$TRIMUI_PREFIX/lib" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-zlib --with-bzip2 LIBPNG_CFLAGS="-I$TRIMUI_PREFIX/include/libpng12 LIBPNG_LDFLAGS=-L$TRIMUI_PREFIX/lib -lpng12"
+#../../tool/ConfigConv configure
+CC=arm-linux-gnueabi-gcc CC_BUILD=arm-linux-gnueabi-gcc ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-zlib --with-bzip2
 mkdir objs
 cp -f ../../freetype/apinames.exe ./objs/apinames
 make
@@ -149,7 +163,8 @@ wget -nc http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-2.0.11.tar.gz
 tar xvf SDL_ttf-2.0.11.tar.gz
 if [ -e ./SDL_ttf-2.0.11 ]; then
 pushd SDL_ttf-2.0.11
-CFLAGS="-I$TRIMUI_PREFIX/include/freetype2 -I$TRIMUI_PREFIX/include/SDL" LDFLAGS="-L$TRIMUI_PREFIX/lib -lm -ldl" ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-freetype-prefix=-L$TRIMUI_PREFIX/lib --with-sdl-prefix=$TRIMUI_PREFIX
+../../tool/ConfigConv configure
+./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-freetype-prefix=-L$TRIMUI_PREFIX/lib --with-sdl-prefix=$TRIMUI_PREFIX
 make
 make install
 popd

@@ -44,6 +44,7 @@ https://www.msys2.org/
 
 ```
 pacman -S git
+pacman -S pkg-config
 git clone https://github.com/bluexe203/trimui-toolchain_for_windows.git
 cd trimui-toolchain_for_windows
 bash Msys2_LibrarySetup.sh

@@ -21,7 +21,7 @@ https://www.msys2.org/
    pacman -S libtool
    ```
 
-4. [Download Toolchain for Windows](https://github.com/bluexe203/trimui-toolchain_for_windows/releases/download/v1.0/trimui-toolchain.tar.gz)
+4. [Download Toolchain for Windows](https://github.com/bluexe203/trimui-toolchain_for_windows/releases/download/v1.0/trimui-toolchain.tar.xz)
 
 5. Extract Toolchain
 

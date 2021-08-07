@@ -1,17 +1,13 @@
 #! /bin/bash
 
 export ARCH=arm
-export TRIMUI_PREFIX=/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi
-export TRIMUI_LIB_PREFIX=$TRIMUI_PREFIX/arm-linux-gnueabi/libc/lib
-export CROSS_PREFIX=arm-linux-gnueabi-
-export LDFLAGS="-L$TRIMUI_PREFIX/lib"
-export CPPFLAGS="-I$TRIMUI_PREFIX/include"
-export PKG_CONFIG_PATH=$TRIMUI_PREFIX/lib/pkgconfig
+export TRIMUI_PREFIX=arm-buildroot-linux-gnueabi
+export TRIMUI_SYSROOT_PREFIX=/opt/trimui/$TRIMUI_PREFIX/libc/usr
+export CROSS_PREFIX=${TRIMUI_PREFIX}-
+export PKG_CONFIG_PATH=$TRIMUI_SYSROOT_PREFIX/lib/pkgconfig
 
 init_flags(){
-	export LDFLAGS="-L$TRIMUI_PREFIX/lib"
-	export CPPFLAGS="-I$TRIMUI_PREFIX/include"
-	export PKG_CONFIG_PATH=$TRIMUI_PREFIX/lib/pkgconfig
+export PKG_CONFIG_PATH=$TRIMUI_SYSROOT_PREFIX/lib/pkgconfig
 }
 
 mkdir package
@@ -25,7 +21,7 @@ if [ -e ./zlib-1.2.8 ]; then
 pushd zlib-1.2.8
 ../../tool/ConfigConv configure
 init_flags
-./configure --shared --prefix=$TRIMUI_PREFIX
+./configure --shared --prefix=$TRIMUI_SYSROOT_PREFIX
 make
 make install
 popd
@@ -38,8 +34,8 @@ if [ -e ./bzip2-1.0.6 ]; then
 pushd bzip2-1.0.6
 cp -f ../../bzip2/Makefile ./
 cp -f ../../bzip2/Makefile-libbz2_so ./
-make install PREFIX=$TRIMUI_PREFIX
-make -f Makefile-libbz2_so PREFIX=$TRIMUI_PREFIX
+make install PREFIX=$TRIMUI_SYSROOT_PREFIX
+make -f Makefile-libbz2_so PREFIX=$TRIMUI_SYSROOT_PREFIX
 popd
 fi
 
@@ -50,7 +46,7 @@ if [ -e ./jpeg-9b ]; then
 pushd jpeg-9b
 #../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared
 make
 make install
 popd
@@ -63,7 +59,7 @@ if [ -e ./libpng-1.2.56 ]; then
 pushd libpng-1.2.56
 #../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-arm-neon=no
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-arm-neon=no
 make
 make install
 popd
@@ -76,7 +72,7 @@ if [ -e ./alsa-lib-1.1.1 ]; then
 pushd alsa-lib-1.1.1
 #../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-alsa-devdir=/dev/snd --with-pcm-plugins=all --with-ctl-plugins=all --without-versioned --enable-static=no --disable-python --with-softfloat
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-alsa-devdir=/dev/snd --with-pcm-plugins=all --with-ctl-plugins=all --without-versioned --enable-static=no --disable-python --with-softfloat
 make
 make install
 popd
@@ -89,7 +85,7 @@ if [ -e ./SDL-1.2.15 ]; then
 pushd SDL-1.2.15
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-video-fbcon=no --enable-video-directfb=no --enable-video-qtopia=no --enable-video-x11=no --disable-pth --disable-rpath --enable-pulseaudio=no --disable-arts --disable-esd --disable-nasm --disable-video-ps3
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --enable-video-fbcon=no --enable-video-directfb=no --enable-video-qtopia=no --enable-video-x11=no --disable-pth --disable-rpath --enable-pulseaudio=no --disable-arts --disable-esd --disable-nasm --disable-video-ps3
 make
 make install
 popd
@@ -102,7 +98,7 @@ if [ -e ./SDL_gfx-2.0.23 ]; then
 pushd SDL_gfx-2.0.23
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --enable-static --disable-mmx
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX --disable-sdltest --enable-static --disable-mmx
 make
 make install
 popd
@@ -115,7 +111,7 @@ if [ -e ./SDL_image-1.2.12 ]; then
 pushd SDL_image-1.2.12
 ../../tool/ConfigConv configure
 init_flags
-./configure  --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --disable-static --enable-bmp=yes --enable-gif=no --enable-jpg=yes --enable-lbm=no --enable-pcx=no --enable-png=yes --enable-pnm=no --enable-tga=no --enable-tif=no --enable-webp=no --enable-xcf=no --enable-xpm=no --enable-xv=no
+./configure  --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX --disable-sdltest --disable-static --enable-bmp=yes --enable-gif=no --enable-jpg=yes --enable-lbm=no --enable-pcx=no --enable-png=yes --enable-pnm=no --enable-tga=no --enable-tif=no --enable-webp=no --enable-xcf=no --enable-xpm=no --enable-xv=no
 make
 make install
 popd
@@ -128,7 +124,7 @@ if [ -e ./SDL_mixer-1.2.12 ]; then
 pushd SDL_mixer-1.2.12
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX --disable-music-midi --disable-music-mod --disable-music-mp3 --disable-music-flac --enable-music-mp3-mad-gpl --disable-music-mp3-mad-gpl-shared --enable-music-ogg --disable-music-ogg-shared
 make
 make install
 popd
@@ -141,7 +137,7 @@ if [ -e ./SDL_net-1.2.8 ]; then
 pushd SDL_net-1.2.8
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --with-sdl-exec-prefix=/var/lib/trimui-toolchain//usr/arm-linux-gnueabi/sysroot/usr
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX --with-sdl-exec-prefix=/var/lib/trimui-toolchain//usr/$TRIMUI_PREFIX/sysroot/usr
 make
 make install
 popd
@@ -154,7 +150,7 @@ if [ -e ./SDL_sound-1.0.3 ]; then
 pushd SDL_sound-1.0.3
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_PREFIX --disable-sdltest --enable-static --disable-mmx
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX --disable-sdltest --enable-static --disable-mmx
 make
 make install
 popd
@@ -167,7 +163,7 @@ if [ -e ./freetype-2.6.3 ]; then
 pushd freetype-2.6.3
 #../../tool/ConfigConv configure
 init_flags
-CC=arm-linux-gnueabi-gcc CC_BUILD=arm-linux-gnueabi-gcc ./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-zlib --with-bzip2
+CC=$TRIMUI_PREFIX-gcc CC_BUILD=$TRIMUI_PREFIX-gcc ./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --program-prefix= --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --with-zlib --with-bzip2
 mkdir objs
 cp -f ../../freetype/apinames.exe ./objs/apinames
 make
@@ -182,7 +178,7 @@ if [ -e ./SDL_ttf-2.0.11 ]; then
 pushd SDL_ttf-2.0.11
 ../../tool/ConfigConv configure
 init_flags
-./configure --target=arm-linux-gnueabi --host=arm-linux-gnueabi --build=arm-linux --prefix=$TRIMUI_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-freetype-prefix=-L$TRIMUI_PREFIX/lib --with-sdl-prefix=$TRIMUI_PREFIX
+./configure --target=$TRIMUI_PREFIX --host=$TRIMUI_PREFIX --build=arm-linux --prefix=$TRIMUI_SYSROOT_PREFIX --disable-gtk-doc --disable-gtk-doc-html --disable-doc --disable-docs --disable-documentation --with-xmlto=no --with-fop=no --disable-dependency-tracking --enable-ipv6 --enable-static --enable-shared --without-x --with-freetype-prefix=$TRIMUI_SYSROOT_PREFIX --with-sdl-prefix=$TRIMUI_SYSROOT_PREFIX
 make
 make install
 popd
@@ -193,6 +189,6 @@ wget -nc https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_
 tar xvf boost_1_76_0.tar.bz2
 if [ -e ./boost_1_76_0 ]; then
 pushd boost_1_76_0
-cp -f -r ./boost/ $TRIMUI_PREFIX/include/boost/
+cp -f -r ./boost/ $TRIMUI_SYSROOT_PREFIX/include/boost/
 popd
 fi

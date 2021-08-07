@@ -9,7 +9,7 @@ https://www.msys2.org/
    
    ```
    HOME=home/trimui
-   PATH=$PATH:/opt/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi
+   PATH=/opt/trimui/bin
    ```
 
 3. Install Package
@@ -21,7 +21,7 @@ https://www.msys2.org/
    pacman -S libtool
    ```
 
-4. [Download Toolchain for Windows](https://drive.google.com/file/d/1faaciy_PZXPGHM77n0C4jrhVAFW9FZM-/view?usp=sharing)
+4. [Download Toolchain for Windows](https://github.com/bluexe203/trimui-toolchain_for_windows/releases/download/v1.0/trimui-toolchain.tar.gz)
 
 5. Extract Toolchain
 
@@ -29,8 +29,8 @@ https://www.msys2.org/
 
    ```
    cd /opt
-   # if download toolchain in C:\gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi.tar.xz
-   tar xvf /c/gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi.tar.xz
+   # if download toolchain in C:\trimui-toolchain.tar.xz
+   tar xvf /c/trimui-toolchain.tar.xz
    ```
 
    check this command
@@ -161,11 +161,10 @@ workspace/
    ../abe/abe.sh --manifest gcc-linaro-6.4.1-2017.11-win32-manifest.txt --release 2017.11 --tarball --build all
    ```
 
+   Toolchain is created this directory
    workspace/snapshots
 
    ```
    gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi.tar.xz
    ```
-
-
 

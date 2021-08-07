@@ -80,8 +80,8 @@ gcc_mingw_only="no"
 gcc_configure=
 gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr"
 gcc_staticlink="no"
-gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib--disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=arm926ej-s --with-float=soft --with-mode=arm --disable-libgomp --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-bootstrap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c --with-sysroot=${local_builds}/sysroot-arm-linux-gnueabi --disable-shared --with-glibc-version=2.18"
-gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib--disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=arm926ej-s --with-float=soft --with-mode=arm --enable-languages=c,c++ --enable-shared --disable-libgomp --with-build-sysroot=${sysroots} --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabi/libc"
+gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib--disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=arm926ej-s --with-float=soft --with-mode=arm --disable-libgomp --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-bootstrap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c --with-sysroot=${local_builds}/sysroot-arm-buildroot-linux-gnueabi --disable-shared --with-glibc-version=2.18"
+gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --disable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib--disable-libquadmath --enable-tls --disable-libmudflap --enable-threads --without-isl --without-cloog --with-float=soft --disable-decimal-float --with-abi=aapcs-linux --with-cpu=arm926ej-s --with-float=soft --with-mode=arm --enable-languages=c,c++ --enable-shared --disable-libgomp --with-build-sysroot=${sysroots} --with-sysroot=${local_builds}/destdir/${host}/arm-buildroot-linux-gnueabi/libc"
 
 # Component data for glibc
 glibc_url=http://git.linaro.org/git/toolchain
@@ -113,7 +113,7 @@ gdbserver_staticlink="yes"
 
 
 clibrary=glibc
-target=arm-linux-gnueabi
+target=arm-buildroot-linux-gnueabi
 manifestid=6ab070ceaae5790bf1b18f0fd2495e5481bd9660
 
  ##############################################################################
@@ -129,9 +129,9 @@ distribution: trusty
 host_gcc: gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) 
 
 # These aren't used in the repeat build. just a sanity check for developers
-build directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-linux-gnueabi/_build/builds
-sysroot directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-linux-gnueabi/_build/sysroots/arm-linux-gnueabi
-snapshots directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-linux-gnueabi/snapshots
+build directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-buildroot-linux-gnueabi/_build/builds
+sysroot directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-buildroot-linux-gnueabi/_build/sysroots/arm-buildroot-linux-gnueabi
+snapshots directory: /home/tcwg-buildslave/workspace/tcwg-make-release/builder_arch/amd64/label/tcwg-x86_64-build/target/arm-buildroot-linux-gnueabi/snapshots
 git reference directory: /home/tcwg-buildslave/snapshots-ref
 
 abe_url=https://git-us.linaro.org/toolchain

@@ -2,7 +2,7 @@
 
 export ARCH=arm
 export TRIMUI_PREFIX=arm-buildroot-linux-gnueabi
-export TRIMUI_SYSROOT_PREFIX=/opt/trimui/$TRIMUI_PREFIX/libc/usr
+export TRIMUI_SYSROOT_PREFIX=/opt/trimui-toolchain/$TRIMUI_PREFIX/libc/usr
 export CROSS_PREFIX=${TRIMUI_PREFIX}-
 export PKG_CONFIG_PATH=$TRIMUI_SYSROOT_PREFIX/lib/pkgconfig
 

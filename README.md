@@ -9,7 +9,7 @@ https://www.msys2.org/
    
    ```
    HOME=home/trimui
-   PATH=/opt/trimui/bin
+   PATH=/opt/trimui-toolchain/bin
    ```
 
 3. Install Package

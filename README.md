@@ -36,7 +36,7 @@ https://www.msys2.org/
    check this command
    
    ```
-   arm-linux-gnueabi-gcc -v
+   arm-buildroot-linux-gnueabi-gcc -v
    ```
 ## Install Library
 
@@ -144,11 +144,10 @@ workspace/
 
    ```
    host=i686-w64-mingw32
-   target=arm-linux-gnueabi
    ```
-
+   
    fix mingw32 bug
-
+   
    ```
    '::hypot' has not been declared
    fix cmath
@@ -160,11 +159,11 @@ workspace/
    #build（need many time）
    ../abe/abe.sh --manifest gcc-linaro-6.4.1-2017.11-win32-manifest.txt --release 2017.11 --tarball --build all
    ```
-
+   
    Toolchain is created this directory
    workspace/snapshots
-
+   
    ```
-   gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-linux-gnueabi.tar.xz
+   gcc-linaro-6.4.1-2017.11-i686-mingw32_arm-buildroot-linux-gnueabi.tar.xz
    ```
 
